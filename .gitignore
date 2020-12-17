@@ -1,0 +1,17 @@
+*.iml
+.idea/
+logs/
+data/
+.DS_Store
+__init__.py
+*.pb
+*.vec
+*.bin
+*.svm
+*.pkl
+*.csv
+*.model
+commands
+venv
+output
+./docker/influxdb/*

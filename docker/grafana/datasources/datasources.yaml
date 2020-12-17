@@ -1,0 +1,9 @@
+apiVersion: 1
+
+datasources:
+  - name: InfluxDB
+    type: InfluxDB
+    access: browser
+    orgId: 1
+    database: stockball
+    url: http://localhost:8086

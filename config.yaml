@@ -1,0 +1,377 @@
+sources_path: "/Users/martin.dagostino/workspace/stockball/output/v1/api/react/match-x/soccer"
+
+fantasy_url: "https://fantasy.premierleague.com/api/bootstrap-static/"
+
+database:
+  name: stockball
+  host: localhost
+  port: 8086
+  username: root
+  password: root
+
+rules:
+  team:
+    - pattern: "is having a good opportunity to score"
+      score: 5
+      present: true
+    - pattern: "is in control of the ball"
+      score: 10
+      present: true
+    - pattern: "is trying to create something here"
+      score: 10
+      present: true
+    - pattern: "take a throw-in at the right side of the pitch in the opponent"
+      score: 5
+      present: true
+    - pattern: "take a throw-in at the left side of the pitch in the opponent"
+      score: 5
+      present: true
+    - pattern: "goal kick for"
+      score: -2
+      present: true
+    - pattern: "start a counter attack"
+      score: 10
+      present: true
+    - pattern: "are clearly dominating possession"
+      score: 15
+      present: true
+    - pattern: "no goal! - after reviewing the situation, the referee announces"
+      score: -1
+      present: true
+  player:
+    - pattern: "could be a good chance here"
+      score: 5
+    - pattern: "relieves the pressure with a clearance"
+      score: 10
+    - pattern: "he stops a promising attack with an interception"
+      score: 15
+    - pattern: "is penalised for pushing"
+      score: -5
+      pos: 0
+    - pattern: "is penalised for pushing"
+      score: 5
+    - pattern: "puts in a cross"
+      score: 5
+    - pattern: "had a bad first touch and fails to benefit from his team mates cross"
+      score: -5
+    - pattern: "passes the ball in the box, but it's intercepted by an opponent player"
+      score: 2
+    - pattern: "tries to pick out a team-mate in the area but his cross is blocked by an opponent"
+      score: 2
+    - pattern: "clears the danger but is forced to give away a corner"
+      score: 5
+    - pattern: "swings in the corner from the right"
+      score: 1
+    - pattern: "poor play"
+      score: -1
+    - pattern: "g o o o a a a l"
+      score: 30
+    - pattern: "g o o o o a a a l"
+      score: 30
+    - pattern: "scores after his effort is deflected past the goalkeeper"
+      score: 30
+    - pattern: "safe hands"
+      score: 15
+    - pattern: "the referee signals a free kick as"
+      score: -5
+      pos: 35
+    - pattern: "the referee signals a free kick as"
+      score: 5
+    - pattern: "takes the ball forward trying to make something happen"
+      score: 8
+    - pattern: "crosses the ball, but his team mate arrives a little late and can't benefit from it"
+      score: 2
+    - pattern: "penalty"
+      score: -15
+      pos: 10
+    - pattern: "penalty"
+      score: 15
+      pos: -1
+    - pattern: "takes the free-kick but it is blocked by the wall"
+      score: 2
+    - pattern: "tries to head the ball to a team mate, but the keeper is first to it"
+      score: 2
+    - pattern: "tries to play a 1-2"
+      score: 1
+    - pattern: "shoots from outside the box"
+      score: 3
+      pos: 0
+    - pattern: "shoots from outside the box"
+      score: 15
+      pos: -1
+    - pattern: "yellow card"
+      score: -5
+    - pattern: "red card"
+      score: -30
+    - pattern: "successfully directs the ball behind the defence and finds a team mate"
+      score: 12
+    - pattern: "commits a foul by elbowing"
+      score: -5
+      pos: 0
+    - pattern: "commits a foul by elbowing"
+      score: 2
+      pos: -1
+    - pattern: "reckless challenge there"
+      score: -8
+      pos: 26
+    - pattern: "reckless challenge there"
+      score: 1
+      pos: -1
+    - pattern: "could cost his team a goal after a defensive blunder"
+      score: -10
+    - pattern: "he dribbles past his opponents"
+      score: 7
+    - pattern: "how did he miss that?"
+      score: -6
+    - pattern: "should have been a goal"
+      score: -4
+    - pattern: "carves the opponent's defense open with a killer through-ball"
+      score: 9
+    - pattern: "provided the assist for the goal"
+      score: 25
+    - pattern: "makes a good pass into the box"
+      score: 12
+    - pattern: "finds himself in a 1 on 1 situation with the keeper"
+      score: 4
+    - pattern: "successfully finds a team mate in the area"
+      score: 8
+    - pattern: "directs the ball behind the defence, but the keeper reads the play well and comes to claim it"
+      score: 5
+    - pattern: "sends a long ball upfield"
+      score: 1
+    - pattern: "swings in the corner from the left"
+      score: 1
+    - pattern: "some neat football here as"
+      score: 7
+    - pattern: "sees his pass blocked by an opponent"
+      score: 2
+    - pattern: "crosses the ball but it is nowhere near the intended target"
+      score: 1
+    - pattern: "sends a deflected cross into the box"
+      score: 4
+    - pattern: "fails to find the target with a shot from outside the box"
+      score: 2
+    - pattern: "directs the ball behind the defence"
+      score: 6
+    - pattern: "is ruled offside"
+      score: -1
+    - pattern: "swings in a cross from the free kick"
+      score: 3
+    - pattern: "crosses the ball, but it goes out for a goal kick"
+      score: 2
+    - pattern: "good effort"
+      score: 6
+    - pattern: "miskicks completely. opportunity wasted"
+      score: -3
+    - pattern: "is down injured and receives medical attention on the field"
+      score: -3
+    - pattern: "a shot by"
+      score: 2
+    - pattern: "clears the danger with a good tackle"
+      score: 2
+    - pattern: "passes the ball to a team mate"
+      score: 2
+    - pattern: "sends an effort wide of target"
+      score: 2
+    - pattern: "directs a ball squarely in the box"
+      score: 2
+    - pattern: "is a contender for man of the match after a great performance today"
+      score: 10
+    - pattern: "heads the ball to a team mate"
+      score: 5
+    - pattern: "he directs the ball behind the defence, but the chance eventually goes begging"
+      score: 2
+    - pattern: "a great ball by"
+      score: 7
+    - pattern: "is blocked by the keeper and goes back into play"
+      score: 1
+    - pattern: "pulls a player from the opposite team by the shirt and is booked"
+      score: -4
+    - pattern: "takes a deflection but the keeper is there to cover it"
+      score: 2
+    - pattern: "wastes a huge chance as he hits the crossbar with a volley"
+      score: 1
+    - pattern: "heads the ball, but it's a terrible effort nowhere near the goal"
+      score: 1
+    - pattern: "swings in the ball from a corner on the left, but it is nowhere near a teammate and it goes out of the field"
+      score: 1
+    - pattern: "makes a great save"
+      score: 10
+    - pattern: "sent off! - after a serious foul"
+      score: -30
+    - pattern: "great defending"
+      score: 8
+    - pattern: "puts in a great cross"
+      score: 6
+    - pattern: "sees a huge opportunity go begging as his shot hits the post"
+      score: 9
+    - pattern: "commits a rough foul on an opponent and goes into the referee"
+      score: -5
+    - pattern: "goal! it's an easy finish"
+      score: 30
+    - pattern: "crossbar! a great shot from distance"
+      score: 4
+    - pattern: "tries to head the ball to a team mate"
+      score: 2
+    - pattern: "takes a short corner kick from the left"
+      score: 1
+    - pattern: "sent off! - after a professional foul"
+      score: -30
+    - pattern: "was disallowed via var intervention"
+      score: 5
+    - pattern: "find his team mate with a neat back heel pass"
+      score: 4
+    - pattern: "hand-balls"
+      score: -1
+    - pattern: "plays a cheeky 1-2 with"
+      score: 3
+    - pattern: "heads towards goal but sees his effort blocked"
+      score: 1
+    - pattern: "takes a short corner kick from the right"
+      score: 1
+    - pattern: "has a great chance to score, but fails to score as his effort is blocked"
+      score: 1
+    - pattern: "goes for goal on the direct free kick, but the shot sails wide"
+      score: 2
+    - pattern: "comes back onto the field"
+      score: 2
+    - pattern: "is injured and is taken off the field to receive medical treatment"
+      score: -2
+    - pattern: "goes for goal, but his effort was never close to hitting the target"
+      score: 2
+    - pattern: "a chance presents itself"
+      score: 2
+    - pattern: "sees his shot deflected off target"
+      score: 1
+    - pattern: "passes the ball in the box, but it's intercepted by an opponent player"
+      score: 4
+    - pattern: "goes a bit too far there as the pulls down"
+      score: -2
+      pos: 0
+    - pattern: "goes a bit too far there as the pulls down"
+      score: 2
+      pos: -1
+    - pattern: "shoots from outside the box"
+      score: 7
+      pos: 0
+    - pattern: "has it under control"
+      score: 8
+      pos: -1
+    - pattern: "sends a header towards goal"
+      score: 5
+      pos: 0
+    - pattern: "is there to comfortably save it"
+      score: 8
+      pos: -1
+    - pattern: "dangerous challenge"
+      score: 6
+      pos: 23
+    - pattern: "on the receiving end of that"
+      score: 2
+      pos: -1
+    - pattern: "releases a shot"
+      score: 4
+      pos: 0
+    - pattern: "releases a shot"
+      score: 8
+      pos: -1
+    - pattern: "saved a certain goal there"
+      score: 15
+      pos: 0
+    - pattern: "found himself in a great scoring position"
+      score: -5
+      pos: -1
+    - pattern: "is leaving the field to be replaced"
+      score: -4
+      pos: 0
+    - pattern: "is leaving the field to be replaced"
+      score: 4
+      pos: -1
+    - pattern: "from behind and it's a free-kick"
+      score: -3
+      pos: 27
+    - pattern: "from behind and it's a free-kick"
+      score: 4
+      pos: -1
+    - pattern: "is injured and is replaced by"
+      score: -4
+      pos: 0
+    - pattern: "is injured and is replaced by"
+      score: 4
+      pos: -1
+    - pattern: "comes out to smother the ball"
+      score: 4
+      pos: 0
+    - pattern: "comes out to smother the ball"
+      score: 6
+      pos: -1
+    - pattern: "he misses"
+      score: -1
+      pos: 13
+    - pattern: "he misses"
+      score: 6
+      pos: -1
+    - pattern: "tries his luck from outside the box. the shot is deflected and forces"
+      score: 6
+      pos: 10
+    - pattern: "tries his luck from outside the box. the shot is deflected and forces"
+      score: 9
+      pos: -1
+    - pattern: "gets a good shooting opportunity and opts for a cheeky lob"
+      score: 6
+      pos: 0
+    - pattern: "gets a good shooting opportunity and opts for a cheeky lob"
+      score: 10
+      pos: -1
+    - pattern: "with a long range shot, which is parried back into play"
+      score: 5
+      pos: 0
+    - pattern: "with a long range shot, which is parried back into play"
+      score: 8
+      pos: -1
+    - pattern: "obstruction"
+      score: -3
+      pos: 15
+    - pattern: "obstruction"
+      score: 6
+      pos: -1
+    - pattern: "it's a good hit from long range by"
+      score: 6
+      pos: 35
+    - pattern: "it's a good hit from long range by"
+      score: 12
+      pos: -1
+    - pattern: "has a great chance to score"
+      score: 5
+      pos: 0
+    - pattern: "comes out strongly to save"
+      score: 14
+      pos: -1
+    - pattern: "tries to play a nice 1-2"
+      score: 5
+      pos: 0
+    - pattern: "the keeper comes out of his goal to claim it"
+      score: 9
+      pos: -1
+    - pattern: "who turns the ball behind for a corner"
+      score: 7
+      pos: 0
+    - pattern: "who turns the ball behind for a corner"
+      score: 10
+      pos: -1
+    - pattern: "the resulting free-kick is taken by"
+      score: 6
+      pos: 36
+    - pattern: "the resulting free-kick is taken by"
+      score: 10
+      pos: -1
+    - pattern: "so nearly a goal there"
+      score: 4
+      pos: 24
+    - pattern: "so nearly a goal there"
+      score: 12
+      pos: -1
+    - pattern: "fails to connect properly on the volley and sends the ball wide of target"
+      score: -1
+    - pattern: "chips the ball into the penalty box"
+      score: 3

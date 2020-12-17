@@ -1,0 +1,46 @@
+#!/bin/bash
+set -e
+
+load_fixture() {
+  local output_path=${1}
+  local url=${2}
+  echo "OUTPUT PATH: ${output_path}"
+  echo "URL: ${url}"
+  wgrep --directory ${output_path} stav ${url}
+}
+
+# TODO: enable loader action given more filters (control if event exists in path)
+load_matches() {
+  local output_path=${1}
+  local url=${2}
+  local fixture_path=${3}
+
+  echo "FIXTURE PATH: ${fixture_path}"
+
+  sample=$(jq .Stages[0].Events ${output_path}/${fixture_path})
+
+  for row in $(echo "${sample}" | jq -r '.[] | @base64'); do
+    _jq() {
+     echo ${row} | base64 --decode | jq -r ${1}
+    }
+
+    event_state=$(_jq '.Eps')
+
+    if [ ${event_state} == "FT" ]; then
+      event_id=$(_jq '.Eid')
+      event_url=${url}/a/${event_id}
+      wgrep --directory ${output_path} stav ${event_url}
+    fi
+
+  done
+}
+
+run() {
+  load_fixture "$@"
+  load_matches "$@"
+}
+
+COMMAND=$1
+shift
+
+${COMMAND} "$@"

@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+generate_app_log() {
+    for i in $(docker ps -a --format "{{.ID}}:{{.Label \"com.docker.compose.service\"}}"); do
+        CONTAINER_ID=$(echo $i | cut -d':' -f1)
+        SERVICE_NAME=$(echo $i | cut -d':' -f2)
+        docker logs $CONTAINER_ID >> $SERVICE_NAME.log
+    done;
+}
+
+generate_app_log

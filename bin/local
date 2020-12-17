@@ -1,0 +1,38 @@
+#!/bin/bash
+set -e
+
+docker_compose_up() {
+    docker_compose_down
+    COMPOSE_HTTP_TIMEOUT=360 USERID=$(id -u):$(id -g) docker-compose -f docker-compose.yml --project-name ${DOCKER_PROJECT_NAME} up -d --build "$@"
+    docker_wait_until_healthy_or_none 0 180
+    docker ps -a
+    echo "---output of stopped containers---"
+    for container in $(docker ps --filter status=exited -q); do
+        echo "${container}"
+        docker logs "${container}"
+    done
+    docker_validate
+}
+
+docker_compose_down() {
+    docker-compose -f docker-compose.yml --project-name ${DOCKER_PROJECT_NAME} down -v || true
+    docker-compose -f docker-compose.yml --project-name ${DOCKER_PROJECT_NAME} rm --force || true
+    docker rm "$(docker ps -a -q)" -f || true
+}
+
+redeploy_suse() {
+    COMPOSE_HTTP_TIMEOUT=360 USERID=$(id -u):$(id -g) docker-compose -f docker-compose.yml --project-name ${DOCKER_PROJECT_NAME} up -d --force-recreate --build supersonic-sessions || true
+    docker_wait_until_healthy_or_none 0 180
+    docker ps -a
+    echo "---output of stopped containers---"
+    for container in $(docker ps --filter status=exited -q); do
+        echo "${container}"
+        docker logs "${container}"
+    done
+    docker_validate
+}
+
+COMMAND=$1
+shift
+
+${COMMAND} "$@"

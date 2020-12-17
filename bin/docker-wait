@@ -1,0 +1,39 @@
+#!/bin/bash
+set -e
+
+docker_wait_until_healthy_or_none(){
+  local wait=${1}
+  local total_wait=${2}
+
+  if [[ "$wait" -ge "$total_wait" ]]; then
+      echo "docker_wait ran out of time, exit 0"
+      docker ps -a
+      exit 0
+  fi
+  for starting in $(docker ps --filter health=starting -q); do
+    sleep 10
+    docker_wait_until_healthy_or_none $((wait+10)) $total_wait
+  done
+
+  for unhealthy in $(docker ps --filter health=unhealthy -q); do
+    sleep 10
+    docker_wait_until_healthy_or_none $((wait+10)) $total_wait
+  done
+}
+
+docker_validate(){
+  #containers exited
+  exitedContainers=$(docker ps --filter status=exited -q)
+  #containers exited with 0 exitcode (valid exit)
+  validExitedContainers=$(docker ps --all --filter exited=0 -q)
+  #if there is a diff between above it means one or more containers exited unhealthy
+  if [[ "$exitedContainers" != "$validExitedContainers" ]]; then
+      echo "docker_validate fail"
+      docker ps -a
+      exit 1
+  fi
+  echo "docker_validate success"
+}
+
+docker_wait_until_healthy_or_none 0 360
+docker_validate
