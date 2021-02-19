@@ -15,3 +15,4 @@ commands
 venv
 output
 ./docker/influxdb/*
+src/__pycache__/
