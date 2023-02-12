@@ -1,5 +1,7 @@
 # StockBall ![](./documentation/images/stock-logo.png)
 
+⚠️ A new verison of this repo is called [Anfield](https://github.com/margostino/anfield)
+
 Every football player in Premier League in a trading system. 😃 ⚽ 🏴󠁧󠁢󠁥󠁮󠁧󠁿
 
 This is a lab experiment to be able to process real-time data from every match in Premier League and score every player performance given certain pre-defined rules.
